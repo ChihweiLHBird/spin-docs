@@ -11,33 +11,35 @@ This document contains the help content for the `spin` command-line program.
 
 **Command Overview:**
 
-<!-- no toc -->
-- [`spin`](#spin)
-- [`spin add`](#spin-add)
-- [`spin build`](#spin-build)
-- [`spin deploy`](#spin-deploy)
-- [`spin doctor`](#spin-doctor)
-- [`spin login`](#spin-login)
-- [`spin new`](#spin-new)
-- [`spin plugins`](#spin-plugins)
-- [`spin plugins install`](#spin-plugins-install)
-- [`spin plugins list`](#spin-plugins-list)
-- [`spin plugins search`](#spin-plugins-search)
-- [`spin plugins show`](#spin-plugins-show)
-- [`spin plugins uninstall`](#spin-plugins-uninstall)
-- [`spin plugins update`](#spin-plugins-update)
-- [`spin plugins upgrade`](#spin-plugins-upgrade)
-- [`spin registry`](#spin-registry)
-- [`spin registry login`](#spin-registry-login)
-- [`spin registry pull`](#spin-registry-pull)
-- [`spin registry push`](#spin-registry-push)
-- [`spin templates`](#spin-templates)
-- [`spin templates install`](#spin-templates-install)
-- [`spin templates list`](#spin-templates-list)
-- [`spin templates uninstall`](#spin-templates-uninstall)
-- [`spin templates upgrade`](#spin-templates-upgrade)
-- [`spin up`](#spin-up)
-- [`spin watch`](#spin-watch)
+* [`spin`↴](#spin)
+* [`spin add`↴](#spin-add)
+* [`spin build`↴](#spin-build)
+* [`spin deploy`↴](#spin-deploy)
+* [`spin doctor`↴](#spin-doctor)
+* [`spin login`↴](#spin-login)
+* [`spin new`↴](#spin-new)
+* [`spin plugins`↴](#spin-plugins)
+* [`spin plugins install`↴](#spin-plugins-install)
+* [`spin plugins list`↴](#spin-plugins-list)
+* [`spin plugins search`↴](#spin-plugins-search)
+* [`spin plugins show`↴](#spin-plugins-show)
+* [`spin plugins uninstall`↴](#spin-plugins-uninstall)
+* [`spin plugins update`↴](#spin-plugins-update)
+* [`spin plugins upgrade`↴](#spin-plugins-upgrade)
+* [`spin registry`↴](#spin-registry)
+* [`spin registry login`↴](#spin-registry-login)
+* [`spin registry pull`↴](#spin-registry-pull)
+* [`spin registry push`↴](#spin-registry-push)
+* [`spin targets`↴](#spin-targets)
+* [`spin targets list`↴](#spin-targets-list)
+* [`spin targets update`↴](#spin-targets-update)
+* [`spin templates`↴](#spin-templates)
+* [`spin templates install`↴](#spin-templates-install)
+* [`spin templates list`↴](#spin-templates-list)
+* [`spin templates uninstall`↴](#spin-templates-uninstall)
+* [`spin templates upgrade`↴](#spin-templates-upgrade)
+* [`spin up`↴](#spin-up)
+* [`spin watch`↴](#spin-watch)
 
 ## `spin`
 
@@ -55,6 +57,7 @@ The Spin CLI
 * `new` — Scaffold a new application based on a template
 * `plugins` — Install/uninstall Spin plugins
 * `registry` — Commands for working with OCI registries to distribute applications
+* `targets` — Commands for the target environments catalogue
 * `templates` — Commands for working with WebAssembly component templates
 * `up` — Start the Spin application
 * `watch` — Build and run the Spin application, rebuilding and restarting it when files change
@@ -378,14 +381,48 @@ Push a Spin application to a registry
 * `--annotation <ANNOTATIONS>` — Specifies the OCI image manifest annotations (in key=value format). Any existing value will be overwritten. Can be used multiple times
 * `--build` — Specifies to perform `spin build` (with the default options) before pushing the application
 * `--cache-dir <CACHE_DIR>` — Cache directory for downloaded registry data
-* `--compose` — Compose component dependencies before pushing the application.
+* `--compose <COMPOSE>` — Compose component dependencies before pushing the application.
 
    The default is to compose before pushing, which maximises compatibility with different Spin runtime hosts. Turning composition off can optimise bandwidth for shared dependencies, but makes the pushed image incompatible with hosts that cannot carry out composition themselves.
 
+   To turn composition off, pass the value with an equals sign: `--compose=false`. The space-separated form `--compose false` is not accepted.
+
   Default value: `true`
+
+  Possible values: `true`, `false`
+
 * `-f`, `--from <APP_MANIFEST_FILE>` — The application to push. This may be a manifest (spin.toml) file, or a directory containing a spin.toml file. If omitted, it defaults to "spin.toml"
 * `-k`, `--insecure` — Ignore server certificate errors
 * `--profile <PROFILE>` — The build profile to push. The default is the anonymous profile (usually the release build)
+
+
+
+## `spin targets`
+
+Commands for the target environments catalogue
+
+**Usage:** `spin targets <COMMAND>`
+
+###### **Subcommands:**
+
+* `list` — List known target environments
+* `update` — Update the target environments from the remote repository
+
+
+
+## `spin targets list`
+
+List known target environments
+
+**Usage:** `spin targets list`
+
+
+
+## `spin targets update`
+
+Update the target environments from the remote repository
+
+**Usage:** `spin targets update`
 
 
 
